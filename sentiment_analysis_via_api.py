@@ -30,18 +30,25 @@ from azure.ai.textanalytics import TextAnalyticsClient
 def get_sentiment_score_using_google(text_list):
     client = language_v1.LanguageServiceClient()
 
+    texts = []
     text_sentiment = []
     text_score = []
 
     for text in tqdm(text_list):  
-        document = language_v1.Document(content=text,type_=language_v1.Document.Type.PLAIN_TEXT)
-        sentiment = client.analyze_sentiment(request={'document': document}).document_sentiment
-        text_score.append(sentiment.score)
+        try:
+            document = language_v1.Document(
+                content=text,
+                type_=language_v1.Document.Type.PLAIN_TEXT,language='en')
+            sentiment = client.analyze_sentiment(request={'document': document}).document_sentiment
 
-        sentiment_ = 'positive' if sentiment.score > 0 else 'negative' # This is just me
-        text_sentiment.append(sentiment_)
+            texts.append(text)
+            text_score.append(sentiment.score)
+            sentiment_ = 'positive' if sentiment.score > 0 else 'negative' # This is just me
+            text_sentiment.append(sentiment_)
+        except:
+            pass
 
-    return text_list, text_sentiment, text_score
+    return texts, text_sentiment, text_score
 
 
 if __name__ == '__main__' :
@@ -50,16 +57,16 @@ if __name__ == '__main__' :
     with open(CONFIG_FILE) as cfg:
         config = yaml.safe_load(cfg)
 
-    tweets2019 = pd.read_csv(config['data']['tweets_2019'])
-    # tweets2020 = pd.read_csv(config['data']['tweets_2020'])
+    # tweets2019 = pd.read_csv(config['data']['tweets_2019'])
+    tweets2020 = pd.read_csv(config['data']['tweets_2020'])
 
-    text_list_2019 = list(tweets2019['text'])
-    text_list_2019 = text_list_2019[0:100]
-    # text_list_2020 = list(tweets2020['text'])
+    # text_list_2019 = list(tweets2019['text'])
+    # text_list_2019 = text_list_2019[180:190]
+    text_list_2020 = list(tweets2020['text'])
 
     # Use Google Natural Language API
     print('Analyzing sentiment...')
-    text_list_, text_sentiment, text_score = get_sentiment_score_using_google(text_list_2019)
+    text_list_, text_sentiment, text_score = get_sentiment_score_using_google(text_list_2020)
 
     # Save output
     print('Done. Saving...')

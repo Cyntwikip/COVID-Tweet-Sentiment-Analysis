@@ -54,7 +54,7 @@ if __name__ == '__main__' :
     # tweets2020 = pd.read_csv(config['data']['tweets_2020'])
 
     text_list_2019 = list(tweets2019['text'])
-    text_list_2019 = text_list_2019[0:20]
+    text_list_2019 = text_list_2019[0:100]
     # text_list_2020 = list(tweets2020['text'])
 
     # Use Google Natural Language API
@@ -69,5 +69,5 @@ if __name__ == '__main__' :
         'score':text_score})
 
     df.to_csv(config['output']['google'], index=False)
-
+    print('Saved at {}.'.format(config['output']['google']))
 

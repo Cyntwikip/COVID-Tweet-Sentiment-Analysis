@@ -2,7 +2,7 @@
    or paid cloud APIs.
 
 Usage:
-    python sentiment_analysis_via_api.py config.py 
+    python sentiment_analysis_via_api.py config.yaml 
 
 Author:
     Cedric Basuel

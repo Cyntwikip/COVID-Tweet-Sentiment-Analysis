@@ -37,29 +37,6 @@ def get_sentiment_score_using_google(text_list):
     return text_list, text_sentiment, text_score
 
 
-def get_sentiment_score_using_azure(text_list, credential, client):
-    credential=AzureKeyCredential(credential)
-    text_analytics_client=TextAnalyticsClient(endpoint=client, credential=credential)
-
-    text_sentiment = []
-    text_score = []
-
-    for text in text_list:
-        response = text_analytics_client.analyze_sentiment([text],language='en')
-
-        temp_sentiment = response[0].sentiment
-        # try KeyError temp_sentiment is 'mixed'
-        try:
-            temp_score = response[0].confidence_scores[temp_sentiment]
-        except KeyError:
-            temp_score = 0.5
-
-        text_sentiment.append(temp_sentiment)
-        text_score.append(temp_score)
-
-    return text_list, text_sentiment, text_score
-
-
 if __name__ == '__main__' :
     CONFIG_FILE = sys.argv[1]
 
@@ -83,11 +60,11 @@ if __name__ == '__main__' :
     #     client=config['azure_endpoint'])
 
     # Save output
-    # df = pd.DataFrame({
-    #     'text':text_list_,
-    #     'sentiment':text_sentiment,
-    #     'score':text_score})
+    df = pd.DataFrame({
+        'text':text_list_,
+        'sentiment':text_sentiment,
+        'score':text_score})
 
-    # df.to_csv(config['output']['google'])
+    df.to_csv(config['output']['google'])
 
 

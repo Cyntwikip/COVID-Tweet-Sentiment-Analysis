@@ -10,6 +10,12 @@ Author:
 Notes:
     If using the Google API, set env variables in terminal first.
     For example: `export GOOGLE_APPLICATION_CREDENTIALS="/Users/service_key.json"`
+
+References:
+    Google natural language api: 
+        https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values
+    Microsoft text analytics api:
+        https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-sentiment-analysis?tabs=version-3-1
 '''
 
 import sys

@@ -53,18 +53,12 @@ if __name__ == '__main__' :
     # Use Google Natural Language API
     text_list_, text_sentiment, text_score = get_sentiment_score_using_google(text_list_2019)
 
-    # Use Microsoft Text Analytics
-    # text_list_, text_sentiment, text_score = get_sentiment_score_using_azure(
-    #     text_list_2019,
-    #     credential=config['azure_key'],
-    #     client=config['azure_endpoint'])
-
     # Save output
     df = pd.DataFrame({
         'text':text_list_,
         'sentiment':text_sentiment,
         'score':text_score})
 
-    df.to_csv(config['output']['google'])
+    df.to_csv(config['output']['google'], index=False)
 
 

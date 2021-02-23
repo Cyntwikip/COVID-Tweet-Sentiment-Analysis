@@ -22,6 +22,7 @@ import sys
 import yaml
 from google.cloud import language_v1
 import pandas as pd
+from tqdm import tqdm
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.textanalytics import TextAnalyticsClient
 
@@ -32,7 +33,7 @@ def get_sentiment_score_using_google(text_list):
     text_sentiment = []
     text_score = []
 
-    for text in text_list:  
+    for text in tqdm(text_list):  
         document = language_v1.Document(content=text,type_=language_v1.Document.Type.PLAIN_TEXT)
         sentiment = client.analyze_sentiment(request={'document': document}).document_sentiment
         text_score.append(sentiment.score)
@@ -53,13 +54,15 @@ if __name__ == '__main__' :
     # tweets2020 = pd.read_csv(config['data']['tweets_2020'])
 
     text_list_2019 = list(tweets2019['text'])
-    text_list_2019 = text_list_2019[0:10]
+    text_list_2019 = text_list_2019[0:20]
     # text_list_2020 = list(tweets2020['text'])
 
     # Use Google Natural Language API
+    print('Analyzing sentiment...')
     text_list_, text_sentiment, text_score = get_sentiment_score_using_google(text_list_2019)
 
     # Save output
+    print('Done. Saving...')
     df = pd.DataFrame({
         'text':text_list_,
         'sentiment':text_sentiment,

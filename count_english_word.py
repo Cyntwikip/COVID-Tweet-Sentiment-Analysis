@@ -12,10 +12,6 @@ nltk.download('words')
 
 def clean_tweets(text_list):
 
-    # remove trailing \t \n ???
-    # gawing dictionary ung config nito 
-    # para for loop instead of multiple if statements
-
     # lowercase
     cleaned_text = [text.lower() for text in text_list]
 

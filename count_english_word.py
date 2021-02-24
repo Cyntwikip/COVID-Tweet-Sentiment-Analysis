@@ -20,7 +20,7 @@ def clean_tweets(text_list):
     cleaned_text = [text.lower() for text in text_list]
 
     # remove \n and \t
-    cleaned_text = [text.replace('\n', '') for text in text_list]
+    cleaned_text = [text.replace('\n', ' ') for text in text_list]
 
     # remove special characters
     cleaned_text = [''.join([char for char in text if char not in string.punctuation]) for text in cleaned_text]
@@ -49,5 +49,5 @@ if __name__ == '__main__':
 
     english_words = set(words.word())
 
-    
+
 

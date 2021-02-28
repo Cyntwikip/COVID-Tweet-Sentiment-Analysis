@@ -51,6 +51,23 @@ def get_sentiment_score_using_google(text_list):
     return texts, text_sentiment, text_score
 
 
+# credential=AzureKeyCredential("20c211ec772b4c808c57428e8d1c1105")
+# text_analytics_client=TextAnalyticsClient(endpoint="https://sample-senti-analysis.cognitiveservices.azure.com/", credential=credential)
+
+# def get_microsoft_score(text_list):
+#     text_score_positive = []
+#     text_score_negative = []
+#     text_score_neutral = []
+#     for text in text_list:
+#         response=text_analytics_client.analyze_sentiment([text], language='en')
+#         results = [doc for doc in response if not doc.is_error]
+#         for doc in results:
+#             text_score_positive.append(doc.confidence_scores.positive)
+#             text_score_negative.append(doc.confidence_scores.negative)
+#             text_score_neutral.append(doc.confidence_scores.neutral) 
+#     return text_list, text_score_positive, text_score_negative, text_score_neutral
+
+
 if __name__ == '__main__' :
     CONFIG_FILE = sys.argv[1]
 

@@ -7,4 +7,4 @@ See the <a href="https://twittercommunity.com/t/twitter-data-and-counts-endpoint
 The `top users` folder contains the top 30 users tweet data in JSON format. In addition, there are also scripts to parse the said file and also calculate the sentiment score of each tweet in it. To get you started, read and run the following files in order:
 1. `top-user-tweets-parser.ipynb` - parses the data, and saves the relevant data into CSV format 
 2. `top-user-sentiments.ipynb` - calculates the sentiments and token-used ratio of each tweet.
-3. `sentiment_analysis_via_api.api` - calculates sentiments using the Google Cloud Natural Language API. Saves output in `csv` format. 
+3. `sentiment_analysis_via_api.py` - calculates sentiments using the Google Cloud Natural Language API. Saves output in `csv` format. 
